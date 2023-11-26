@@ -6,4 +6,5 @@
 bash deidentify.sh --input <input_folder>
 
 # Specifics
+Docker clones sub repository git@github.com:qcrisw/ehr_deidentification.git
 Docker container mounts input and output folders under /mnt/

@@ -7,7 +7,7 @@ ENV PATH="/root/miniconda3/bin:${PATH}"
 ARG PATH="/root/miniconda3/bin:${PATH}"
 RUN apt-get update
 
-RUN apt-get install -y wget
+RUN apt-get install -y wget && apt-get install --assume-yes git
 
 RUN wget \
     https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
@@ -17,7 +17,7 @@ RUN wget \
 
 # Create conda environment
 # COPY ./ehr_deidentification /ehr_deidentification
-RUN git clone git@github.com:qcrisw/ehr_deidentification.git
+RUN git clone https://github.com/qcrisw/ehr_deidentification.git
 WORKDIR /ehr_deidentification
 
 RUN conda env create -f /ehr_deidentification/deid.yml
