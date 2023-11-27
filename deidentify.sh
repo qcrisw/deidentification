@@ -43,7 +43,7 @@ fi
 # Check if input is a folder
 if [[ ! -d $input ]]; then
     usage
-    die "Input is not a folder"
+    die "$input is not a folder or does not exist."
 fi
 
 # Check if input.jsonl is not in input folder
@@ -87,7 +87,7 @@ container_id=$(docker run -v ./"$input":/mnt/"$input" \
                           -v "$(pwd)"/_cache/transformers:/root/.cache/huggingface/transformers \
                           -v "$(pwd)"/_cache/datasets:/root/.cache/huggingface/datasets \
                           --gpus 1 \
-                          -d ehr_deid tail -f /dev/null)           
+                          -d ehr_deid tail -f /dev/null)
 
 # Run the forward pass on the input file using docker exec
 echo "Executing deidentification process on container $container_id..."
