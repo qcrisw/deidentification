@@ -1,11 +1,11 @@
 # Dockerfile instructions
-- *cpu*: docker build -t ehr_deid .
-- *gpu*: docker build -t ehr_deid -f Dockerfile-gpu .
+- *cpu*: `docker build -t ehr_deid .`
+- *gpu*: `docker build -t ehr_deid -f Dockerfile-gpu .`
 
 # Run script
 - Create input directory `mkdir dataset`
 - Add your identified dataset with the name `input.jsonl`
-- bash deidentify.sh --input dataset
+- `bash deidentify.sh --input dataset` in Windows or `./deidentify.sh --input ./dataset` in Linux
 
 # Specifics
 Docker clones sub repository git@github.com:qcrisw/ehr_deidentification.git
