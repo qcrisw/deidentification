@@ -8,5 +8,5 @@
 - `bash deidentify.sh --input dataset` in Windows or `./deidentify.sh --input ./dataset` in Linux
 
 # Specifics
-Docker clones sub repository `git@github.com:qcrisw/ehr_deidentification.git`
+Docker clones sub repository https://github.com/qcrisw/ehr_deidentification.git
 Docker container mounts input and output folders under /mnt/
