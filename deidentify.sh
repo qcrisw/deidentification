@@ -100,5 +100,5 @@ docker exec -it "$container_id" /bin/bash -c "./steps/forward_pass/forward_pass.
 
 # Stop the container
 echo "Done."
-# echo "Stopping container $container_id"
-# docker container kill "$container_id"
+echo "Stopping container $container_id"
+docker container kill "$container_id"
