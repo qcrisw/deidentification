@@ -22,7 +22,7 @@ WORKDIR /ehr_deidentification
 
 RUN conda env create -f /ehr_deidentification/deid.yml
 RUN echo "source activate deid" > ~/.bashrc
-ENV PATH /opt/conda/envs/deid/bin:$PATH
+ENV PATH /root/miniconda3/envs/deid/bin:$PATH
 RUN /root/miniconda3/envs/deid/bin/python -m pip install robust-deid
 RUN apt update && apt install -y jq && apt install -y moreutils && rm -rf /var/lib/apt/lists/*
 
