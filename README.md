@@ -2,8 +2,7 @@
 - [Docker installed](https://docs.docker.com/engine/install/ubuntu/)
 
 # Dockerfile instructions
-- *cpu*: `docker build -t ehr_deid .`
-- *gpu*: `docker build -t ehr_deid -f Dockerfile-gpu .`
+- `docker build -t ehr_deid .`
 
 # Run script
 - Create input directory `mkdir dataset`

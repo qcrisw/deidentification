@@ -81,17 +81,28 @@ echo "Mounting input directory: ./$input"
 echo "Mounting output ./$output"
 
 echo "Running container ehr_deid..."
-container_id=$(docker run -v ./"$input":/mnt/"$input" \
+
+# If gpu is present, run with gpu, else run without gpu
+if command -v nvidia-smi &> /dev/null; then
+    container_id=$(docker run --user=root -v ./"$input":/mnt/"$input" \
                           -v ./"$output":/mnt/"$output" \
                           -v ./ehr_deidentification:/ehr_deidentification \
                           -v "$(pwd)"/_cache/transformers:/root/.cache/huggingface/transformers \
                           -v "$(pwd)"/_cache/datasets:/root/.cache/huggingface/datasets \
                           --gpus 1 \
                           -d ehr_deid tail -f /dev/null)
+else
+    container_id=$(docker run -v ./"$input":/mnt/"$input" \
+                          -v ./"$output":/mnt/"$output" \
+                          -v ./ehr_deidentification:/ehr_deidentification \
+                          -v "$(pwd)"/_cache/transformers:/root/.cache/huggingface/transformers \
+                          -v "$(pwd)"/_cache/datasets:/root/.cache/huggingface/datasets \
+                          -d ehr_deid tail -f /dev/null)
+fi
 
 # Run the forward pass on the input file using docker exec
 echo "Executing deidentification process on container $container_id..."
-docker exec -it "$container_id" /bin/bash -c "./steps/forward_pass/forward_pass.sh \
+docker exec -it "$container_id" micromamba run /bin/bash -c "./steps/forward_pass/forward_pass.sh \
         --INPUT_FILE /mnt/"$input"/input.jsonl \
         --NER_DATASET_FILE ./data/ner_datasets/test.jsonl \
         --PREDICTIONS_FILE ./data/predictions/predictions.jsonl \
@@ -101,4 +112,4 @@ docker exec -it "$container_id" /bin/bash -c "./steps/forward_pass/forward_pass.
 # Stop the container
 echo "Done."
 echo "Stopping container $container_id"
-docker container kill "$container_id"
+# docker container kill "$container_id"
