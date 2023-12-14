@@ -112,4 +112,4 @@ docker exec -it "$container_id" micromamba run /bin/bash -c "./steps/forward_pas
 # Stop the container
 echo "Done."
 echo "Stopping container $container_id"
-# docker container kill "$container_id"
+docker container kill "$container_id"
