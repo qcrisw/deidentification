@@ -23,21 +23,9 @@ env:
 
 
 jobs:
-  populate-submodule:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Initialize and update submodule
-      run: |
-        git submodule update --init --recursive
-
   build:
 
     runs-on: ubuntu-latest
-    needs: populate-submodule
     permissions:
       contents: read
       packages: write
@@ -48,6 +36,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Initialize and update submodule
+        run: |
+          git submodule update --init --recursive
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
