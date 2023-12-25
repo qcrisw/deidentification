@@ -8,6 +8,7 @@ RUN apt update && apt install -y jq && apt install -y moreutils && rm -rf /var/l
 
 # COPY ./ehr_deidentification /ehr_deidentification
 RUN git clone https://github.com/qcrisw/ehr_deidentification.git
+RUN git submodule update --init --recursive
 RUN mkdir -p ./ehr_deidentification/run/models
 WORKDIR /ehr_deidentification
 
