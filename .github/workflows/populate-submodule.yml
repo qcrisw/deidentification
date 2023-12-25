@@ -1,0 +1,18 @@
+name: Populate Submodule
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  populate-submodule:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Initialize and update submodule
+      run: |
+        git submodule update --init --recursive
