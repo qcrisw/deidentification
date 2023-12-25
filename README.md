@@ -18,7 +18,7 @@
 
 # `input.jsonl` format
 
-Each discharge summary should follow the following format in `input.jsonl`
+Each discharge summary should follow the following format in `dataset/input.jsonl`
 
 ```
 {
