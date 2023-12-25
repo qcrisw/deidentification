@@ -7,15 +7,10 @@ RUN apt-get update && apt-get install --assume-yes git
 RUN apt update && apt install -y jq && apt install -y moreutils && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/qcrisw/ehr_deidentification.git
-WORKDIR /ehr_deidentification
-
-# RUN conda env create -f /ehr_deidentification/deid.yml
 USER $MAMBA_USER
 
-RUN ls
-RUN pwd
-
-COPY --chown=$MAMBA_USER:$MAMBA_USER /ehr_deidentification/deid.yml /tmp/env.yaml
+COPY --chown=$MAMBA_USER:$MAMBA_USER ehr_deidentification/deid.yml /tmp/env.yaml
+WORKDIR /ehr_deidentification
 
 RUN micromamba install -y -n base -f /tmp/env.yaml && \
     micromamba clean --all --yes
