@@ -6,7 +6,7 @@ USER root
 RUN apt-get update && apt-get install --assume-yes git
 RUN apt update && apt install -y jq && apt install -y moreutils && rm -rf /var/lib/apt/lists/*
 
-RUN git submodule update --init --recursive
+RUN git clone https://github.com/qcrisw/ehr_deidentification.git /
 WORKDIR /ehr_deidentification
 
 # RUN conda env create -f /ehr_deidentification/deid.yml
