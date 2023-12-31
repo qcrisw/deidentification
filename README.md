@@ -2,6 +2,7 @@
 - [Docker installed](https://docs.docker.com/engine/install/ubuntu/)
 
 # Dockerfile instructions
+- Make sure submodule directory exists with `git submodule update --init --recursive`
 - `docker build -t ehr_deid .`
 - Or pull the built image with `docker pull ghcr.io/qcrisw/deidentification:master`
     - Note that you will need to login to ghcr and to make sure that you are authorized to download the container
